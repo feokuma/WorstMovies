@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorstMovies", "WorstMovies.API\WorstMovies.csproj", "{36A0D54E-776B-4666-A0CD-06006B403394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorstMovies.IntegrationTests", "WorstMovies.IntegrationTests\WorstMovies.IntegrationTests.csproj", "{CA428400-3FBF-4EF2-BA49-8A6DDC710DAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36A0D54E-776B-4666-A0CD-06006B403394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36A0D54E-776B-4666-A0CD-06006B403394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36A0D54E-776B-4666-A0CD-06006B403394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36A0D54E-776B-4666-A0CD-06006B403394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA428400-3FBF-4EF2-BA49-8A6DDC710DAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA428400-3FBF-4EF2-BA49-8A6DDC710DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA428400-3FBF-4EF2-BA49-8A6DDC710DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA428400-3FBF-4EF2-BA49-8A6DDC710DAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
