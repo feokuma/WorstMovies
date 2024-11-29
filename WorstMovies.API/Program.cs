@@ -1,6 +1,11 @@
+using WorstMovies.Infrastructure.Data.Extensions;
+using WorstMovies.Infrastructure.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services
+    .AddOpenApi()
+    .AddInfrastructureServices();
 
 var app = builder.Build();
 
@@ -11,6 +16,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "It Works!").WithName("Get All Movies");
+app.MapGet("/", async (IMovieRepository movieRepository) =>
+{
+    var movies = await movieRepository.GetAllAsync();
+    return "It Works!";
+}).WithName("Get All Movies");
 
 app.Run();
