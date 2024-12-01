@@ -10,6 +10,7 @@ public class MovieConfiguration: IEntityTypeConfiguration<Movie>
     {
         builder.ToTable("Movies");
         builder.HasKey(m => m.Id);
+        builder.Property(m => m.Id).ValueGeneratedOnAdd();
         builder.Property(m => m.Year).IsRequired();
         builder.Property<string>(m => m.Title).IsRequired();
         builder.Property(m => m.Producer).IsRequired();
