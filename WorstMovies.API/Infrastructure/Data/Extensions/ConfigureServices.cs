@@ -8,7 +8,7 @@ public static class ConfigureServices
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
-        services.AddDbContext<MovieDbContext>(options => options.UseSqlite("Data Source=WorstMovies.db"));
+        services.AddDbContext<MovieDbContext>();
         services.AddTransient<DatabaseInitializer>();
         services.AddScoped<IMovieRepository, MovieRepository>();
         return services;

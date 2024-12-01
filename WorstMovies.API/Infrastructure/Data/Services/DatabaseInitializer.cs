@@ -9,10 +9,12 @@ namespace WorstMovies.Infrastructure.Data.Services;
 public class DatabaseInitializer
 {
     private readonly MovieDbContext _movieDbContext;
+    private readonly string _csvFilePath;
     
-    public DatabaseInitializer(MovieDbContext context)
+    public DatabaseInitializer(MovieDbContext context, IConfiguration configuration)
     {
         _movieDbContext = context; 
+        _csvFilePath = configuration.GetValue<string>("CsvFilePath");
     }
 
     public void InitializeDatabase()
@@ -20,12 +22,12 @@ public class DatabaseInitializer
         _movieDbContext.Database.EnsureDeleted();
         _movieDbContext.Database.EnsureCreated();
         
-        SeedDataFromCSV("Infrastructure/movielist.csv");
+        SeedDataFromCSV();
     }
 
-    private void SeedDataFromCSV(string csvFilePath)
+    private void SeedDataFromCSV()
     {
-        using var reader = new StreamReader(csvFilePath);
+        using var reader = new StreamReader(_csvFilePath);
         using var csvMovies = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Delimiter = ";",
