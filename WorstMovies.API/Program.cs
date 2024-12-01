@@ -31,3 +31,5 @@ app.MapGet("/", async (IMovieRepository movieRepository) =>
 }).WithName("Get All Movies");
 
 app.Run();
+
+public partial class Program { }

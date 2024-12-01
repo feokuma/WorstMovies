@@ -27,6 +27,9 @@ public class DatabaseInitializer
 
     private void SeedDataFromCSV()
     {
+        if (!File.Exists(_csvFilePath))
+            return;
+        
         using var reader = new StreamReader(_csvFilePath);
         using var csvMovies = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
         {
