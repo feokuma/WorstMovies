@@ -1,4 +1,6 @@
 using System.Text.Json;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using WorstMovies.Infrastructure.Data.Extensions;
 using WorstMovies.Infrastructure.Data.Repositories;
 using WorstMovies.Infrastructure.Data.Services;
@@ -14,7 +16,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var databaseInitializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
-    databaseInitializer.InitializeDatabase();
+    databaseInitializer.InitializeDatabaseAsync();
 }
 
 if (app.Environment.IsDevelopment())
@@ -24,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", async (IMovieRepository movieRepository) =>
+app.MapGet("/getwinnerproducers", async (IMovieRepository movieRepository) =>
 {
     var moviesWithSmallestWinnerIntervals = await movieRepository.GetProducersWithSmallestWinnerIntervals();
     var moviesWithLongestWinnerIntervals = await movieRepository.GetProducersWithLongestWinnerIntervals();
@@ -34,7 +36,7 @@ app.MapGet("/", async (IMovieRepository movieRepository) =>
         max = moviesWithLongestWinnerIntervals,
     };
     return JsonSerializer.Serialize(result);
-}).WithName("Get All Movies");
+}).WithName("Get Producers with Smallest and Longest Winner Intervals");
 
 app.Run();
 

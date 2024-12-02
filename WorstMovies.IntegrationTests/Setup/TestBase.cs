@@ -35,7 +35,7 @@ public abstract class TestBase: IAsyncLifetime
         await Context.Database.EnsureDeletedAsync();
     }
 
-    public async Task BuilderAndLoadCsvFileMovies(IEnumerable<MovieFromCsvDto> movies)
+    public async Task BuilderAndLoadCsvFileMoviesAsync(IEnumerable<MovieFromCsvDto> movies)
     {
         var databaseInitializer = Services.GetRequiredService<DatabaseInitializer>();
         var configuration = Services.GetRequiredService<IConfiguration>();
@@ -55,6 +55,6 @@ public abstract class TestBase: IAsyncLifetime
         await csvWriter.WriteRecordsAsync(movies);
         await csvWriter.FlushAsync();
         
-        databaseInitializer.InitializeDatabase();
+        await databaseInitializer.InitializeDatabaseAsync();
     }
 }

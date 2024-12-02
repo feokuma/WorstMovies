@@ -19,7 +19,7 @@ public class MovieRepositoryTests: TestBase
     public async Task Should_GetAllMoviesFromDatabase()
     {
         var movies = new MovieFromCsvDtoBuilder().Generate(2);
-        await BuilderAndLoadCsvFileMovies(movies);
+        await BuilderAndLoadCsvFileMoviesAsync(movies);
         
         var moviesFromDatabase = await _movieRepository.GetAllAsync();
         

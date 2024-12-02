@@ -27,7 +27,7 @@ public class MovieRepository: IMovieRepository
         return await _context.Movies
             .Where(m => m.Winner == "yes")
             .GroupBy(m => m.Producer)
-            .Where(g => g.Count() >= 2)
+            .Where(g => g.Count() >= 1)
             .Select(g => new
             {
                 Producer = g.Key,
@@ -45,7 +45,7 @@ public class MovieRepository: IMovieRepository
         return await _context.Movies
             .Where(m => m.Winner == "yes")
             .GroupBy(m => m.Producer)
-            .Where(g => g.Count() >= 2)
+            .Where(g => g.Count() >= 1)
             .Select(g => new
             {
                 Producer = g.Key,

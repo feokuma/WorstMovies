@@ -1,4 +1,4 @@
 namespace WorstMovies.IntegrationTests.Setup;
 
-[CollectionDefinition("WebApplicationFactory")]
+[CollectionDefinition("WebApplicationFactory", DisableParallelization = true)]
 public class WebApplicationTestsCollection: ICollectionFixture<WorstMoviesApplicationFactory> { }

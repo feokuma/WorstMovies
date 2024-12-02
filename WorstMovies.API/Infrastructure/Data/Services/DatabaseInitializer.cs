@@ -17,10 +17,11 @@ public class DatabaseInitializer
         _csvFilePath = configuration.GetValue<string>("CsvFilePath");
     }
 
-    public void InitializeDatabase()
+    public async Task InitializeDatabaseAsync()
     {
-        _movieDbContext.Database.EnsureDeleted();
-        _movieDbContext.Database.EnsureCreated();
+        await _movieDbContext.Database.EnsureDeletedAsync();
+        _movieDbContext.ChangeTracker.Clear();
+        await _movieDbContext.Database.EnsureCreatedAsync();
         
         SeedDataFromCSV();
     }
