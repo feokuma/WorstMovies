@@ -26,8 +26,14 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", async (IMovieRepository movieRepository) =>
 {
-    var movies = await movieRepository.GetAllAsync();
-    return JsonSerializer.Serialize(movies);
+    var moviesWithSmallestWinnerIntervals = await movieRepository.GetProducersWithSmallestWinnerIntervals();
+    var moviesWithLongestWinnerIntervals = await movieRepository.GetProducersWithLongestWinnerIntervals();
+    var result = new
+    {
+        min = moviesWithSmallestWinnerIntervals,
+        max = moviesWithLongestWinnerIntervals,
+    };
+    return JsonSerializer.Serialize(result);
 }).WithName("Get All Movies");
 
 app.Run();
