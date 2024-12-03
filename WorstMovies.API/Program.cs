@@ -1,6 +1,4 @@
-using System.Text.Json;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+using Scalar.AspNetCore;
 using WorstMovies.Infrastructure.Data.Extensions;
 using WorstMovies.Infrastructure.Data.Repositories;
 using WorstMovies.Infrastructure.Data.Services;
@@ -22,9 +20,34 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("/movies", async (IMovieRepository movieRepository) =>
+{
+    var movies = await movieRepository.GetAllAsync();
+    var response = new
+    {
+        type = "list",
+        description = "Get all movies",
+        data = movies
+    };
+    return Results.Ok(response);
+}).WithSummary("Get all movies");
+
+app.MapGet("/movies/{id:int}", async (IMovieRepository movieRepository, int id) =>
+{
+    var movie = await movieRepository.GetByIdAsync(id);
+    var response = new
+    {
+        type = "item",
+        description = "Get movie by id",
+        data = movie
+    };
+    return Results.Ok(response);
+}).WithSummary("Get movie by id");
 
 app.MapGet("/winnerproducer/interval/max", async (IMovieRepository movieRepository) =>
 {
@@ -36,7 +59,7 @@ app.MapGet("/winnerproducer/interval/max", async (IMovieRepository movieReposito
         data = moviesWithLongestWinnerIntervals,
     };
     return Results.Ok(response);
-}).WithName("Get producers with longest Winner intervals");
+}).WithSummary("Get producers with longest Winner intervals");
 
 app.MapGet("/winnerproducer/interval/min", async (IMovieRepository movieRepository) =>
 {
@@ -48,7 +71,7 @@ app.MapGet("/winnerproducer/interval/min", async (IMovieRepository movieReposito
         data = moviesWithSmallesttWinnerIntervals,
     };
     return Results.Ok(response);
-}).WithName("Get producers with smallest Winner intervals");
+}).WithSummary("Get producers with smallest Winner intervals");
 
 app.Run();
 

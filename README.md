@@ -5,6 +5,7 @@ Esta API tem retonar a lista dos indicadores e vencedores da categoria **Pior Fi
 - [.NET 9](https://dotnet.microsoft.com/pt-br/download/dotnet/9.0)
 - [EF Core](https://learn.microsoft.com/pt-br/ef/core/)
 - [SQLite](https://www.sqlite.org/)
+- [Scalar](https://github.com/scalar/scalar?tab=readme-ov-file)
 
 ---
 
@@ -22,6 +23,9 @@ Na raiz do projeto execute o seguinte comando para executar a aplicação:
 ```shell
 dotnet run --project WorstMovies.API
 ```
+
+### Documentação da API
+Este projeto possui uma documentação construída com o [Scalar](https://github.com/scalar/scalar?tab=readme-ov-file) e pode ser acessada na url http://localhost:5202/scalar/v1 onde é possível testar os endpoints.
 
 ---
 
