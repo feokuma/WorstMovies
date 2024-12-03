@@ -26,17 +26,29 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/getwinnerproducers", async (IMovieRepository movieRepository) =>
+app.MapGet("/winnerproducer/interval/max", async (IMovieRepository movieRepository) =>
 {
-    var moviesWithSmallestWinnerIntervals = await movieRepository.GetProducersWithSmallestWinnerIntervals();
     var moviesWithLongestWinnerIntervals = await movieRepository.GetProducersWithLongestWinnerIntervals();
-    var result = new
+    var response = new
     {
-        min = moviesWithSmallestWinnerIntervals,
-        max = moviesWithLongestWinnerIntervals,
+        type = "max",
+        description = "Producers with longest winner intervals",
+        data = moviesWithLongestWinnerIntervals,
     };
-    return JsonSerializer.Serialize(result);
-}).WithName("Get Producers with Smallest and Longest Winner Intervals");
+    return Results.Ok(response);
+}).WithName("Get producers with longest Winner intervals");
+
+app.MapGet("/winnerproducer/interval/min", async (IMovieRepository movieRepository) =>
+{
+    var moviesWithSmallesttWinnerIntervals = await movieRepository.GetProducersWithSmallestWinnerIntervals();
+    var response = new
+    {
+        type = "min",
+        description = "Producers with smallest winner intervals",
+        data = moviesWithSmallesttWinnerIntervals,
+    };
+    return Results.Ok(response);
+}).WithName("Get producers with smallest Winner intervals");
 
 app.Run();
 

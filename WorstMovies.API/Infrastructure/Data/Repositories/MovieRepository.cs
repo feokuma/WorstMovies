@@ -6,6 +6,7 @@ namespace WorstMovies.Infrastructure.Data.Repositories;
 public class MovieRepository: IMovieRepository
 {
     private readonly MovieDbContext _context;
+    private const int MINIMAL_WINNERS = 2;
     
     public MovieRepository(MovieDbContext context)
     {
@@ -27,7 +28,7 @@ public class MovieRepository: IMovieRepository
         return await _context.Movies
             .Where(m => m.Winner == "yes")
             .GroupBy(m => m.Producer)
-            .Where(g => g.Count() >= 1)
+            .Where(g => g.Count() >= MINIMAL_WINNERS)
             .Select(g => new
             {
                 Producer = g.Key,
@@ -45,7 +46,7 @@ public class MovieRepository: IMovieRepository
         return await _context.Movies
             .Where(m => m.Winner == "yes")
             .GroupBy(m => m.Producer)
-            .Where(g => g.Count() >= 1)
+            .Where(g => g.Count() >= MINIMAL_WINNERS)
             .Select(g => new
             {
                 Producer = g.Key,
